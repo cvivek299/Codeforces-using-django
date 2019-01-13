@@ -9,20 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="074f7f1c-b107-41fb-bbea-c60c5c9c1ab2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/blog.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/new.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entry/templates/entry/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/entry/templates/entry/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entry/templates/entry/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/entry/templates/entry/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entry/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/entry/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rating/templates/rating/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/rating/templates/rating/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userprofile/templates/userprofile/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/userprofile/templates/userprofile/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userprofile/templates/userprofile/social.html" beforeDir="false" afterPath="$PROJECT_DIR$/userprofile/templates/userprofile/social.html" afterDir="false" />
-    </list>
+    <list default="true" id="074f7f1c-b107-41fb-bbea-c60c5c9c1ab2" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -426,12 +413,12 @@
       <workItem from="1547106790246" duration="14346000" />
       <workItem from="1547188319147" duration="12845000" />
       <workItem from="1547278490357" duration="9083000" />
-      <workItem from="1547370082938" duration="2471000" />
+      <workItem from="1547370082938" duration="3037000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123147000" />
+    <option name="totallyTimeSpent" value="123713000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
