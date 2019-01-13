@@ -10,7 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="074f7f1c-b107-41fb-bbea-c60c5c9c1ab2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -405,12 +405,12 @@
       <workItem from="1547106790246" duration="14346000" />
       <workItem from="1547188319147" duration="12845000" />
       <workItem from="1547278490357" duration="9083000" />
-      <workItem from="1547370082938" duration="1591000" />
+      <workItem from="1547370082938" duration="1611000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122267000" />
+    <option name="totallyTimeSpent" value="122287000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
