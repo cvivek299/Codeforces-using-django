@@ -1,0 +1,197 @@
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+
+<div class="Page">
+
+    <div class="row">
+        <div class="col-auto Logo" align="center">
+            <input type="image" src="https://st.codeforces.com/s/88434/images/ny-codeforces-logo-with-telegram.png"/>
+        </div>
+        <div class="col" align="center">
+            {% if user %}
+                <span class="Links"><a href="/userprofile/{{ user.username }}"><u>{{ user.username }}</u></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
+            {% else %}
+            <span class="Links"><a href="/entry/login"><u>Enter</u></a>&nbsp|&nbsp<a href="/entry/register"><u>Register</u></a></span>
+            {%  endif %}
+        </div>
+    </div>
+<!--navigation bar-->
+    <nav class="navbar navbar-expand-lg navbar-light BorderNav">
+      <a class="navbar-brand" href="http://127.0.0.1:8000/blog/">Blog</a>
+        <a class="navbar-brand" href="http://127.0.0.1:8000/rating/">Rating</a>
+    </nav>
+    <!--navigation bar-->
+
+
+
+    <div class="Blog">
+
+        <!-- blog part-->
+        <div class="BlogName"><h2><a href="/blog/{{ blog.id }}/">{{ blog.blogName | safe }}</a></h2></div>
+        <div><b>By <a href="/userprofile/{{ blog.user.username }}/" class="Username">{{ blog.user.username | safe }}</a></b></div>
+        <br>
+        <p class="Description">
+            {{ blog.description | safe}}
+        </p>
+        <!-- blog part-->
+
+        <!--votes vala bar of blog-->
+        <nav class="navbar navbar-light justify-content-between BorderNav">
+            <form class="form-inline" action="#" method="post"> <!-- blog vote(sends blogVote with up or down value)-->
+                {% csrf_token %}
+                <button type="submit" name="blogVote" value="{{ blog.id }},up" style="background-color:transparent; border-color:transparent;">
+                    <img src="https://st.codeforces.com/s/14735/images/actions/voteup.png">
+                </button>
+                {% if blog.votes < 0 %}
+                    <span class="navbar-brand mb-0 h1">&nbsp {{ blog.votes }}</span>
+                {% else %}
+                    <span class="navbar-brand mb-0 h1">&nbsp +{{ blog.votes }}</span>
+                {% endif %}
+                <button type="submit" name="blogVote" value="{{ blog.id }},down" style="background-color:transparent; border-color:transparent;">
+                    <img src="https://st.codeforces.com/s/14735/images/actions/votedown.png">
+                </button>
+            </form>
+            <form class="form-inline">
+                <input type="image" src="https://st.codeforces.com/s/14735/images/blog/user_16x16.png" />
+                &nbsp
+                    {{ blog.user.username }}
+                &nbsp
+                <input type="image" src="https://st.codeforces.com/s/14735/images/blog/comments_16x16.png" />
+                &nbsp
+                {{ noOfComments }}
+            </form>
+        </nav>
+        <!--votes vala bar of blog-->
+    </div>
+
+    <!-- comments Heading-->
+    <br><br>
+    <form class="form-inline">
+        <input type="image" src="https://st.codeforces.com/s/75473/images/icons/comments-48x48.png" />
+        <span class="CommentHighlight"><h2>Comments({{ noOfComments }})</h2></span>
+    </form>
+    <!-- comments Heading-->
+
+    <!--comment Box and Link-->
+    <div id="CommentLink" align="right"><u>Write Comment?</u><br><br></div>
+    <div id="WriteComment">
+    <form action="#" method="post">
+        {% csrf_token %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-auto" align="center">
+                    <figure>
+                        <img src="{{ user.profilePhoto }}" width="120" height="90" >
+                        <figcaption>{{ user.username }}</figcaption>
+                    </figure>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col">
+                            <textarea id="exampleFormControlTextarea1" name="commentBox" rows="10" cols="90" autofocus="true"></textarea>
+                        </div>
+                    </div>
+                    <div class="row CommentButtons">
+                        <div class="col" >
+                            <button type="submit" name="commentButton" value="post">Post</button>
+                            <button type="submit" name="commentButton" value="cancel">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+
+    </div>
+
+
+
+
+    {% if commentList %}
+
+        {% for obj in commentList %}
+
+            <div class="container">
+            <div class="row">
+                <div class="col" align="right">
+
+                    <form action="#" method="post"> <!-- blog vote(sends blogVote with up or down value)-->
+                        {% csrf_token %}
+                        <button type="submit" name="commentVote" value="{{ obj.comment.id }},up" style="background-color:transparent; border-color:transparent;">
+                            <img src="https://st.codeforces.com/s/75473/images/actions/comment-voteup.png">
+                        </button>
+                        {% if obj.comment.votes < 0 %}
+                            {{ obj.comment.votes }}
+                        {% else %}
+                            +{{ obj.comment.votes }}
+                        {% endif %}
+                        <button type="submit" name="commentVote" value="{{ obj.comment.id }},down" style="background-color:transparent; border-color:transparent;">
+                            <img src="https://st.codeforces.com/s/75473/images/actions/comment-votedown.png">
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto">
+                  <figure>
+                    <img src="{{ obj.comment.user.profilePhoto }}" width="120" height="90" >
+                    <figcaption align="center">{{ obj.comment.user.username }}</figcaption>
+                  </figure>
+                </div>
+                <div class="col">
+                  {{ obj.comment.description | safe }}
+                </div>
+            </div>
+            </div>
+
+        {% endfor %}
+    {% else %}
+        <p>No comments</p>
+    {% endif %}
+
+    <br><br>
+    <hr>
+    <footer class="Footer">
+        Codeforces(c) Copyright 2010-2018 Mike Mirzayanov<br>
+        The only programming contests Web 2.0 platform<br>
+        Server time: Jan/07/2019 16:12:41UTC+5.5 (d1).<br>
+        <span style="font-size: 0.8em">Privacy Policy</span><br><br>
+        <p>Supported by</p>
+            <input type="image" src="https://st.codeforces.com/s/88434/images/telegram-100x100.png" width="60" />
+            &nbsp &nbsp &nbsp
+            <input type="image" src="https://st.codeforces.com/s/88434/images/itmo_small_en-logo.png" width="110" />
+
+
+    </footer>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#WriteComment").hide();
+        {% if user %}
+            $("#CommentLink").click(function()
+            {
+                $("#WriteComment").show();
+                $("#CommentLink").hide();
+            });
+        {% endif %}
+    });
+
+
+</script>

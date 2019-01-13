@@ -1,0 +1,94 @@
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
+</head>
+
+
+<div class="Page">
+
+    <div class="row">
+        <div class="col-auto Logo" align="center">
+            <input type="image" src="https://st.codeforces.com/s/88434/images/ny-codeforces-logo-with-telegram.png"/>
+        </div>
+        <div class="col" align="center">
+            {% if user %}
+                <span class="Links"><a href="/userprofile/{{ user.username }}/"><u>{{ user.username }}</u></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
+            {% else %}
+            <span class="Links"><a href="/entry/login"><u>Enter</u></a>&nbsp|&nbsp<a href="/entry/register"><u>Register</u></a></span>
+            {%  endif %}
+        </div>
+    </div>
+<!--navigation bar-->
+    <nav class="navbar navbar-expand-lg navbar-light BorderNav">
+      <a class="navbar-brand" href="http://127.0.0.1:8000/blog/">Blog</a>
+        <a class="navbar-brand" href="http://127.0.0.1:8000/rating/">Rating</a>
+    </nav>
+    <!--navigation bar-->
+{%  if blogWithCommentsList %}
+    {% for obj in blogWithCommentsList %}
+        <div class="Blog">
+            <div class="BlogName"><h2><a href="/blog/{{ obj.blog.id }}/">{{ obj.blog.blogName | safe }}</a></h2></div>
+            <div><b>By <a href="/userprofile/{{ obj.blog.user.username }}" class="Username">{{ obj.blog.user.username }}</a></b></div>
+            <br>
+            <p class="Summary">
+                {{ obj.blog.summary | safe }}
+                <br><br>
+                <a href="/blog/{{ obj.blog.id }}/">Read full >></a> <!--to be corrected-->
+            </p>
+
+
+            <!--votes vala bar of blog-->
+            <nav class="navbar navbar-light justify-content-between BorderNav">
+                <form class="form-inline" action="#" method="post"> <!-- blog vote(sends blogVote with up or down value)-->
+                    {% csrf_token %}
+                    <button type="submit" name="blogVote" value="{{ obj.blog.id }},up" style="background-color:transparent; border-color:transparent; padding:0px 0px 0px 0px;">
+                        <img src="https://st.codeforces.com/s/14735/images/actions/voteup.png">
+                    </button>
+                    {% if obj.blog.votes < 0 %}
+                        <span class="navbar-brand mb-0 h1">&nbsp {{ obj.blog.votes }}</span>
+                    {% else %}
+                        <span class="navbar-brand mb-0 h1">&nbsp +{{ obj.blog.votes }}</span>
+                    {% endif %}
+                    <button type="submit" name="blogVote" value="{{ obj.blog.id }},down" style="background-color:transparent; border-color:transparent; padding:0px 0px 0px 0px;">
+                        <img src="https://st.codeforces.com/s/14735/images/actions/votedown.png">
+                    </button>
+                </form>
+                <form class="form-inline">
+                    <input type="image" src="https://st.codeforces.com/s/14735/images/blog/user_16x16.png" />
+                    &nbsp
+                        {{ obj.blog.user.username }}
+                    &nbsp
+                    <input type="image" src="https://st.codeforces.com/s/14735/images/blog/comments_16x16.png" />
+                    &nbsp
+                    {{ obj.noOfComments }}
+                </form>
+            </nav>
+            <!--votes vala bar of blog-->
+        </div>
+    {% endfor %}
+
+{% else %}
+    <p>No blog Present</p>
+{% endif %}
+
+    <br><br>
+    <hr>
+    <footer class="Footer">
+        Codeforces(c) Copyright 2010-2018 Mike Mirzayanov<br>
+        The only programming contests Web 2.0 platform<br>
+        Server time: Jan/07/2019 16:12:41UTC+5.5 (d1).<br>
+        <span style="font-size: 0.8em">Privacy Policy</span><br><br>
+        <p>Supported by</p>
+            <input type="image" src="https://st.codeforces.com/s/88434/images/telegram-100x100.png" width="60" />
+            &nbsp &nbsp &nbsp
+            <input type="image" src="https://st.codeforces.com/s/88434/images/itmo_small_en-logo.png" width="110" />
+
+
+    </footer>
+</div>
+

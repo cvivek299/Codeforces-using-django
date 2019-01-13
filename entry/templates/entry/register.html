@@ -1,0 +1,83 @@
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
+
+</head>
+<div class="Page">
+
+    <div class="row">
+        <div class="col-auto Logo" align="center">
+            <input type="image" src="https://st.codeforces.com/s/88434/images/ny-codeforces-logo-with-telegram.png"/>
+        </div>
+        <div class="col" align="center">
+            {% if user %}
+                <span class="Links"><a href="/userprofile/{{ user.username }}/"><u>{{ user.username }}</u></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
+            {% else %}
+            <span class="Links"><a href="/entry/login"><u>Enter</u></a>&nbsp|&nbsp<a href="/entry/register"><u>Register</u></a></span>
+            {%  endif %}
+        </div>
+    </div>
+<!--navigation bar-->
+    <nav class="navbar navbar-expand-lg navbar-light BorderNav">
+      <a class="navbar-brand" href="http://127.0.0.1:8000/blog/">Blog</a>
+        <a class="navbar-brand" href="http://127.0.0.1:8000/rating/">Rating</a>
+    </nav>
+
+    <b>Fill in the form to register into Codeforces.</b>
+
+    <br>
+    <br>
+    <table class="table table-bordered LoginTable" align="center" >
+        <tr>
+            <th class="LoginHeading">Register into Codeforces</th>
+        </tr>
+        <tr>
+            <td>
+                <!-- login form -->
+                <form action="#" method="post">
+                    {% csrf_token %}
+                    <!-- username -->
+                  <div class="form-group" >
+                    <label for="UsernameLabel" class="FormLabel">Handle</label>
+                    <input type="text" name="username" class="form-control" id="UsernameLabel" aria-describedby="UsernameInfo" placeholder="Enter handle">
+                    <small id="UsernameInfo" class="form-text text-muted">This means your username (nickname) on Codeforces.</small>
+                  </div>
+                    <!-- password -->
+                  <div class="form-group">
+                    <label for="PasswordLabel" class="FormLabel">Password</label>
+                    <input type="password" name="password" class="form-control" id="PasswordLabel" placeholder="Password">
+                  </div>
+                  <div class="form-group">
+                    <label for="ConfirmPasswordLabel" class="FormLabel">Confirm Password</label>
+                    <input type="password" name="confirmPassword" class="form-control" id="ConfirmPasswordLabel" placeholder="Confirm Password">
+                  </div>
+                    <!-- submit -->
+                  <div class="RegisterButton" >
+                    <button type="submit" >Register</button>
+                  </div>
+                </form>
+                <!-- login form-->
+            </td>
+        </tr>
+    </table>
+    <br><br>
+    <hr>
+    <footer class="Footer">
+        Codeforces(c) Copyright 2010-2018 Mike Mirzayanov<br>
+        The only programming contests Web 2.0 platform<br>
+        Server time: Jan/07/2019 16:12:41UTC+5.5 (d1).<br>
+        <span style="font-size: 0.8em">Privacy Policy</span><br><br>
+        <p>Supported by</p>
+            <input type="image" src="https://st.codeforces.com/s/88434/images/telegram-100x100.png" width="60" />
+            &nbsp &nbsp &nbsp
+            <input type="image" src="https://st.codeforces.com/s/88434/images/itmo_small_en-logo.png" width="110" />
+
+
+    </footer>
+</div>
