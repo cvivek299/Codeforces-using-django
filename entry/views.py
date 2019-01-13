@@ -21,7 +21,7 @@ def login(request):
             print("yes")
             userObj = User.objects.get(username=username)
             request.session['memberId'] = userObj.id
-            return HttpResponseRedirect("http://127.0.0.1:8000/blog")
+            return HttpResponseRedirect("/blog")
         else:#invalid user so same page
             print("no")
             return HttpResponseRedirect("#")
@@ -38,7 +38,7 @@ def logout(request):
     except KeyError:
         pass
 
-    return HttpResponseRedirect("http://127.0.0.1:8000/blog")
+    return HttpResponseRedirect("/blog")
 
 def register(request):
     user = None
@@ -59,7 +59,7 @@ def register(request):
                 AuthUser.objects.create_user(username=username, password=password)
                 User(username=username, password=password).save()
                 print("yes")
-                return HttpResponseRedirect("http://127.0.0.1:8000/blog")
+                return HttpResponseRedirect("/blog")
         else:
             print("no")
             return HttpResponseRedirect("#")
