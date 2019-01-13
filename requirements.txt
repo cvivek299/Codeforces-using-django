@@ -4,4 +4,3 @@ django-heroku
 requests
 django_countries
 pycountry
-json
