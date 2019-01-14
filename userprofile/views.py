@@ -36,7 +36,7 @@ def index(request, username):
 
 def social(request):
 
-    json_data = open('../project/userprofile/templates/userprofile/country-by-name.json').read()
+    json_data = open('userprofile/country-by-name.json').read()
 
     jsonData2 = json.dumps(json_data)  # converts to a json structure
 
