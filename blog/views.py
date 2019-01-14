@@ -138,8 +138,7 @@ def new(request):
                 print("hi")
                 blogName = request.POST.get("blogName")
                 description = request.POST.get("blogDescription")
-                summary = description[:100]
-                blog = Blog(blogName=blogName, user=user, summary=summary, description=description)
+                blog = Blog(blogName=blogName, user=user, description=description)
                 blog.save()
                 UserBlog(blog=blog, user=user).save()
                 return HttpResponseRedirect("/blog/")
@@ -163,13 +162,12 @@ class Construct:
             username = blogObj['result']['authorHandle']
             blogName = blogObj['result']['title']
             description = blogObj['result']['content']
-            summary = description[:100]
             blogUser = self.constructUser(username)
             blog = None
             if Blog.objects.filter(blogName=blogName).exists():
                 blog = Blog.objects.get(blogName=blogName)
             else:
-                blog = Blog(blogName=blogName, user=blogUser, summary=summary, description=description)
+                blog = Blog(blogName=blogName, user=blogUser, description=description)
                 blog.save()
 
             if UserBlog.objects.filter(user=blogUser, blog=blog).exists():

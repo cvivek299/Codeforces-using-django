@@ -19,8 +19,7 @@ class User(models.Model):
 class Blog(models.Model):
     blogName = models.CharField(max_length=200, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    summary = models.CharField(max_length=300, default="")
-    description = models.CharField(max_length=3000, default="")
+    description = models.CharField(max_length=6000, default="")
     votes = models.IntegerField(default=0, null=True, blank=True)
 
     def __str__(self):
