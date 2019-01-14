@@ -10,7 +10,7 @@ class User(models.Model):
     country = CountryField(default="", null=True, blank=True)
     contribution = models.IntegerField(default=0, null=True, blank=True)
     rating = models.IntegerField(default=1400, null=True, blank=True)
-    profilePhoto = models.ImageField(default="profilePhoto/no-avatar.jpg", blank=True, null=True,   #optional in both form and db
+    profilePhoto = models.ImageField(default="https://userpic.codeforces.com/no-avatar.jpg", blank=True, null=True,   #optional in both form and db
                                      upload_to="profilePhoto/%Y/%m/%D/")
 
     def __str__(self):

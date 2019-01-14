@@ -37,6 +37,7 @@
             <br>
             <div class="Summary">
                 {{ obj.blog.description | truncatechars_html:500 | safe}}
+                <br><br>
                 <a href="/blog/{{ obj.blog.id }}/">Read full >></a> <!--to be corrected-->
             </div>
 

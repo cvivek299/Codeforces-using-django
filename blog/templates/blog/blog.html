@@ -91,7 +91,7 @@
                 <div class="col-auto" align="center">
                     <figure>
                         <img src="{{ user.profilePhoto }}" width="120" height="90" >
-                        <figcaption>{{ user.username }}</figcaption>
+                        <figcaption><a href="/userprofile/{{ user.username }}" style="color:black">{{ user.username }}</a></figcaption>
                     </figure>
                 </div>
                 <div class="col-4">
@@ -147,7 +147,7 @@
                 <div class="col-auto">
                   <figure>
                     <img src="{{ obj.comment.user.profilePhoto }}" width="120" height="90" >
-                    <figcaption align="center">{{ obj.comment.user.username }}</figcaption>
+                    <figcaption align="center"><a href="/userprofile/{{ obj.comment.user.username }}" style="color:black">{{ obj.comment.user.username }}</a></figcaption>
                   </figure>
                 </div>
                 <div class="col">
