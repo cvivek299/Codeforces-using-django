@@ -52,6 +52,9 @@ def register(request):
     if 'memberId' in request.session:
         user = User.objects.get(id=request.session['memberId'])
 
+    if user:
+        return HttpResponseRedirect('/userprofile/{}'.format(user.username))
+
     print(request.POST)
     template = loader.get_template('entry/register.html')
     if request.POST:
