@@ -11,6 +11,9 @@ def login(request):
     if 'memberId' in request.session:
         user = User.objects.get(id=request.session['memberId'])
 
+    if user:
+        return HttpResponseRedirect('/userprofile/{}'.format(user.username))
+
     print(request.POST)
     template = loader.get_template('entry/login.html')
     if request.POST:
