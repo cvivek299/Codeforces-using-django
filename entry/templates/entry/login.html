@@ -63,7 +63,10 @@
                     <!-- password -->
                   <div class="form-group" >
                     <label for="PasswordLabel" class="FormLabel">Password</label>
-                    <input type="password" name="password" class="form-control" id="PasswordLabel" placeholder="Password">
+                    <input type="password" name="password" class="form-control" id="PasswordLabel" placeholder="Password" aria-describedby="ErrorInfo">
+                    {% if error %}
+                        <small id="ErrorInfo" class="form-text ErrorLabel" >{{ error }}</small>
+                    {% endif %}
                   </div>
                     <!-- submit -->
                   <div class="LoginButton" >

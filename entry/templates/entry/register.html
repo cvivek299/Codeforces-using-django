@@ -46,7 +46,11 @@
                   <div class="form-group" >
                     <label for="UsernameLabel" class="FormLabel">Handle</label>
                     <input type="text" name="username" class="form-control" id="UsernameLabel" aria-describedby="UsernameInfo" placeholder="Enter handle">
-                    <small id="UsernameInfo" class="form-text text-muted">This means your username (nickname) on Codeforces.</small>
+                    {%  if handleError %}
+                      <small id="UsernameInfo" class="form-text ErrorLabel">{{ handleError }}</small>
+                    {% else %}
+                      <small id="UsernameInfo" class="form-text text-muted">This means your username (nickname) on Codeforces.</small>
+                    {% endif %}
                   </div>
                     <!-- password -->
                   <div class="form-group">
@@ -55,7 +59,10 @@
                   </div>
                   <div class="form-group">
                     <label for="ConfirmPasswordLabel" class="FormLabel">Confirm Password</label>
-                    <input type="password" name="confirmPassword" class="form-control" id="ConfirmPasswordLabel" placeholder="Confirm Password">
+                    <input type="password" name="confirmPassword" class="form-control" id="ConfirmPasswordLabel" aria-describedby="PasswordErrorInfo" placeholder="Confirm Password">
+                    {%  if passwordError %}
+                      <small id="PasswordErrorInfo" class="form-text ErrorLabel">{{ passwordError }}</small>
+                    {% endif %}
                   </div>
                     <!-- submit -->
                   <div class="RegisterButton" >

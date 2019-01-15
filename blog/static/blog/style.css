@@ -136,3 +136,8 @@
     width:100%;
     border:double 4px #CCC;
 }
+
+.ErrorLabel
+{
+    color:red;
+}

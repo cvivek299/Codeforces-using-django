@@ -12,6 +12,7 @@ def login(request):
         user = User.objects.get(id=request.session['memberId'])
 
     print(request.POST)
+    template = loader.get_template('entry/login.html')
     if request.POST:
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -23,10 +24,13 @@ def login(request):
             request.session['memberId'] = userObj.id
             return HttpResponseRedirect("/blog")
         else:#invalid user so same page
-            print("no")
-            return HttpResponseRedirect("#")
+            context = {
+                'user': user,
+                'error': 'Invalid handle or password',
+            }
+            return HttpResponse(template.render(context, request))
 
-    template = loader.get_template('entry/login.html')
+
     context = {
         'user': user,
     }
@@ -46,25 +50,35 @@ def register(request):
         user = User.objects.get(id=request.session['memberId'])
 
     print(request.POST)
+    template = loader.get_template('entry/register.html')
     if request.POST:
         username = request.POST.get("username")
         password = request.POST.get("password")
         samePassword = request.POST.get("confirmPassword")
         if password == samePassword:
             try:
-                user = AuthUser.objects.get(username=username)
+                AuthUser.objects.get(username=username)
+                context = {
+                    'user': user,
+                    'handleError': 'This handle is currently in use',
+                }
                 print("no")
-                return HttpResponseRedirect("#")
+                return HttpResponse(template.render(context, request))
+
             except AuthUser.DoesNotExist:
                 AuthUser.objects.create_user(username=username, password=password)
                 User(username=username, password=password).save()
                 print("yes")
                 return HttpResponseRedirect("/blog")
         else:
+            context = {
+                'user': user,
+                'passwordError': 'Confirmation mismatched',
+            }
             print("no")
-            return HttpResponseRedirect("#")
+            return HttpResponse(template.render(context, request))
 
-    template = loader.get_template('entry/register.html')
+
     context = {
         'user': user,
     }

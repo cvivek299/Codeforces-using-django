@@ -9,7 +9,7 @@ class User(models.Model):
     name = models.CharField(default="",max_length=50, null=True, blank=True)
     country = CountryField(default="", null=True, blank=True)
     contribution = models.IntegerField(default=0, null=True, blank=True)
-    rating = models.IntegerField(default=1400, null=True, blank=True)
+    rating = models.IntegerField(default=0, null=True, blank=True)
     profilePhoto = models.ImageField(default="https://userpic.codeforces.com/no-avatar.jpg", blank=True, null=True,   #optional in both form and db
                                      upload_to="profilePhoto/%Y/%m/%D/")
 
@@ -17,7 +17,7 @@ class User(models.Model):
         return "{} ({})".format(self.name, self.username)
 
 class Blog(models.Model):
-    blogName = models.CharField(max_length=200, unique=True)
+    blogName = models.CharField(max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.CharField(max_length=6000, default="")
     votes = models.IntegerField(default=0, null=True, blank=True)
