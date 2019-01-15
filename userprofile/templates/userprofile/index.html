@@ -93,9 +93,9 @@
 <script type="text/javascript">
     $(document).ready(function(){
 
-        {% if user != profileUser %}
-            $("#WriteBlog").hide();
-            $("#Settings").hide();
+        {% if user == profileUser %}
+            $("#WriteBlog").show();
+            $("#Settings").show();
         {% endif %}
     });
 

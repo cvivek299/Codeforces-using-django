@@ -9,6 +9,11 @@
     margin-right: auto;
 
 }
+
+#WriteBlog, #Settings
+{
+    display: none;
+}
 .Blog
 {
     padding-top:20px;
@@ -89,6 +94,7 @@
 #WriteComment
 {
     padding-top: 60px;
+    display: none;
 }
 
 .ProfileTable
