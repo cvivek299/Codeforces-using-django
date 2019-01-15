@@ -7,10 +7,29 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+    </script>
 </head>
 
 
 <div class="Page">
+
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" id="InvalidPopup2" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm ModalDialogPosition">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title WhiteText" id="exampleModalLabel" >You should enter into the system before you vote</p>
+                    <button type="button" class="close WhiteText" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-auto Logo" align="center">
@@ -184,11 +203,19 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $("#WriteComment").hide();
-        {% if user %}
-            $("#CommentLink").click(function()
-            {
+
+        $("#CommentLink").click(function()
+        {
+            {% if user %}
                 $("#WriteComment").show();
                 $("#CommentLink").hide();
+            {% else %}
+                window.location = "/entry/login"
+            {% endif %}
+        });
+
+        {% if popUp %}
+            $('#InvalidPopup2').modal({
             });
         {% endif %}
     });

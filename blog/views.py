@@ -37,8 +37,30 @@ def index(request):
 
     print(user)
 
+    template = loader.get_template('blog/index.html')
+    blogList = Blog.objects.all()
+
+    class blogWithComments:
+        noOfComments = 0
+
+    blogWithCommentsList = []
+
+    for blog in blogList:
+        newObj = blogWithComments()
+        newObj.blog = blog
+        newObj.noOfComments = len(BlogComment.objects.filter(blog=blog))
+        blogWithCommentsList.append(newObj)
+
     if request.POST:
         if "blogVote" in request.POST:
+            if user is None:
+                context = {
+                    'blogWithCommentsList': blogWithCommentsList,
+                    'user': user,
+                    'popUp': True,
+                }
+                return HttpResponse(template.render(context, request))
+
             change = 0
             blogId, type = [x for x in request.POST.get("blogVote").split(',')]
             if type == "up":
@@ -47,22 +69,10 @@ def index(request):
                 change = -1
             updateBlogVotes(blogId, change)
             return HttpResponseRedirect("/blog/")
-    blogList = Blog.objects.all()
-    class blogWithComments:
-        noOfComments = 0
-
-    blogWithCommentsList=[]
-
-    for blog in blogList:
-        newObj = blogWithComments()
-        newObj.blog = blog
-        newObj.noOfComments = len(BlogComment.objects.filter(blog=blog))
-        blogWithCommentsList.append(newObj)
 
 
 
 
-    template = loader.get_template('blog/index.html')
     context = {
         'blogWithCommentsList': blogWithCommentsList,
         'user': user,
@@ -77,8 +87,21 @@ def blog(request, blogId):
     blog = Blog.objects.get(id=blogId)
     print(user)
     print(request.POST)
+
+    commentList = BlogComment.objects.filter(blog_id=blogId)
+    template = loader.get_template('blog/blog.html')
     if request.POST:
         if "blogVote" in request.POST:
+            if user is None:
+                context = {
+                    'blog': blog,
+                    'commentList': commentList,
+                    'noOfComments': len(commentList),
+                    'user': user,
+                    'popUp': True,
+                }
+                return HttpResponse(template.render(context, request))
+
             change = 0
             blogId, type = [x for x in request.POST.get("blogVote").split(',')]
             if type == "up":
@@ -88,6 +111,15 @@ def blog(request, blogId):
             updateBlogVotes(blogId, change)
             return HttpResponseRedirect("/blog/{}/".format(blogId))
         elif "commentVote" in request.POST:
+            if user is None:
+                context = {
+                    'blog': blog,
+                    'commentList': commentList,
+                    'noOfComments': len(commentList),
+                    'user': user,
+                    'popUp': True,
+                }
+                return HttpResponse(template.render(context, request))
             change = 0
             commentId, type = [x for x in request.POST.get("commentVote").split(',')]
             if type == "up":
@@ -111,8 +143,6 @@ def blog(request, blogId):
 
 
 
-    commentList = BlogComment.objects.filter(blog_id=blogId)
-    template = loader.get_template('blog/blog.html')
     context = {
         'blog': blog,
         'commentList': commentList,

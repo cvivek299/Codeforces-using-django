@@ -137,6 +137,22 @@
     border:double 4px #CCC;
 }
 
+.modal-content {
+  background-color: black;
+}
+
+.ModalDialogPosition {
+    position:fixed;
+    bottom:1%;
+    right:1%;
+    margin:0px;
+}
+
+
+.WhiteText
+{
+    color:white;
+}
 .ErrorLabel
 {
     color:red;
