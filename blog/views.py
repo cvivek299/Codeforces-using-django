@@ -176,6 +176,7 @@ def new(request):
             if buttonType == "post":
                 print("hi")
                 blogName = request.POST.get("blogName")
+                blogName = cleanMyField(blogName)
                 description = request.POST.get("blogDescription")
                 description = cleanMyField(description)
                 print(description)
