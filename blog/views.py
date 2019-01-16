@@ -1,8 +1,11 @@
+import bleach as bleach
 import pycountry
 import requests
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.contrib.auth.models import User as AuthUser
+
+from project import settings
 from .models import Blog, BlogComment, Comment, User, UserComment, UserBlog
 from django.db import transaction
 
@@ -18,7 +21,6 @@ def updateBlogVotes(blogId, change):
     blogUser.contribution += change
     blogUser.save()
 
-
 def updateCommentVotes(commentId, change):
     comment = Comment.objects.get(id=commentId)
     comment.votes += change
@@ -26,12 +28,18 @@ def updateCommentVotes(commentId, change):
     commentUser = UserComment.objects.get(comment_id=commentId).user
     commentUser.contribution += change
     commentUser.save()
+
+def cleanMyField(myField):
+    cleaned_text = bleach.clean(myField, settings.BLEACH_VALID_TAGS, settings.BLEACH_VALID_ATTRS,
+                                settings.BLEACH_VALID_STYLES)
+    return cleaned_text  # sanitize html
 #helper functions
 
 
 def index(request):
     user = None
     if 'memberId' in request.session:
+
         user = User.objects.get(id=request.session['memberId'])
 
 
@@ -132,6 +140,7 @@ def blog(request, blogId):
             buttonClicked = request.POST.get("commentButton")
             if buttonClicked == "post":
                 description = request.POST.get("commentBox")
+                description = cleanMyField(description)
                 myComment = Comment(description=description, user=user, blog=blog)
                 myComment.save()
                 BlogComment(blog=blog, comment=myComment).save()
@@ -168,6 +177,8 @@ def new(request):
                 print("hi")
                 blogName = request.POST.get("blogName")
                 description = request.POST.get("blogDescription")
+                description = cleanMyField(description)
+                print(description)
                 blog = Blog(blogName=blogName, user=user, description=description)
                 blog.save()
                 UserBlog(blog=blog, user=user).save()
@@ -259,13 +270,13 @@ class Construct:
 
 
 @transaction.atomic
-def updateBlogDatabase(request, blogId): #updates the database with this blogId
+def updateBlogDatabase1357(request, blogId): #updates the database with this blogId
     createBlog = Construct()
     createBlog.constructBlog(blogId)
     return HttpResponse("Done")
 
 
-def updateUserDatabase(request): #updates the database with this blogId
+def updateUserDatabase1357(request): #updates the database with this blogId
     userList = User.objects.all()
 
     for user in userList:
