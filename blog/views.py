@@ -6,12 +6,11 @@ from django.template import loader
 from django.contrib.auth.models import User as AuthUser
 
 from project import settings
-from .models import Blog, BlogComment, Comment, User, UserComment, UserBlog
+from .models import Blog, BlogComment, Comment, User, UserComment, UserBlog, BlogVote, CommentVote
 from django.db import transaction
 
 #helper functions
-def updateBlogVotes(blogId, change):
-
+def updateBlogVotes(blogId, change, votingUser):
     blog = Blog.objects.get(id=blogId)
     blog.votes += change
     blog.save()
@@ -20,19 +19,60 @@ def updateBlogVotes(blogId, change):
     print(blogUser.username, "jhev")
     blogUser.contribution += change
     blogUser.save()
+    BlogVote(blog=blog, user=votingUser).save()
 
-def updateCommentVotes(commentId, change):
+def updateCommentVotes(commentId, change, votingUser):
     comment = Comment.objects.get(id=commentId)
     comment.votes += change
     comment.save()
     commentUser = UserComment.objects.get(comment_id=commentId).user
     commentUser.contribution += change
     commentUser.save()
+    CommentVote(comment=comment, user=votingUser).save()
 
 def cleanMyField(myField):
     cleaned_text = bleach.clean(myField, settings.BLEACH_VALID_TAGS, settings.BLEACH_VALID_ATTRS,
                                 settings.BLEACH_VALID_STYLES)
     return cleaned_text  # sanitize html
+
+def canVoteBlog(user, blog):
+    if BlogVote.objects.filter(blog=blog, user=user).exists():
+        return False
+    else:
+        return True
+
+def canVoteComment(user, comment):
+    if CommentVote.objects.filter(comment=comment, user=user).exists():
+        return False
+    else:
+        return True
+
+def ownBlog(user, blog):
+    return blog.user == user
+
+def ownComment(user, comment):
+    return comment.user == user
+
+def returnAnyErrorBlog(user, blog):
+    if user is None:
+        return 'You should enter into the system before you vote'
+    if ownBlog(user, blog):
+        return 'You cannot vote for your blogs'
+    if canVoteBlog(user, blog) == False:
+        return 'You cannot vote twice. You have already voted for this topic before.'
+    return None
+
+def returnAnyErrorComment(user, comment):
+    if user is None:
+        return 'You should enter into the system before you vote'
+    if ownComment(user, comment):
+        return 'You cannot vote for your comments'
+    if canVoteComment(user, comment) == False:
+        return 'You cannot vote twice. You have already voted for this comment before.'
+    return None
+
+
+
 #helper functions
 
 
@@ -61,25 +101,26 @@ def index(request):
 
     if request.POST:
         if "blogVote" in request.POST:
-            if user is None:
+            change = 0
+            blogId, type = [x for x in request.POST.get("blogVote").split(',')]
+            currBlog = Blog.objects.get(id=blogId)
+
+            popUpMessage = returnAnyErrorBlog(user, currBlog)
+
+            if popUpMessage is None:
+                if type == "up":
+                    change = 1
+                else:
+                    change = -1
+                updateBlogVotes(blogId, change, user)
+                return HttpResponseRedirect("/blog/")
+            else:
                 context = {
                     'blogWithCommentsList': blogWithCommentsList,
                     'user': user,
-                    'popUp': True,
+                    'popUp': popUpMessage,
                 }
                 return HttpResponse(template.render(context, request))
-
-            change = 0
-            blogId, type = [x for x in request.POST.get("blogVote").split(',')]
-            if type == "up":
-                change = 1
-            else:
-                change = -1
-            updateBlogVotes(blogId, change)
-            return HttpResponseRedirect("/blog/")
-
-
-
 
     context = {
         'blogWithCommentsList': blogWithCommentsList,
@@ -100,42 +141,52 @@ def blog(request, blogId):
     template = loader.get_template('blog/blog.html')
     if request.POST:
         if "blogVote" in request.POST:
-            if user is None:
+            change = 0
+            blogId, type = [x for x in request.POST.get("blogVote").split(',')]
+            currBlog = Blog.objects.get(id=blogId)
+
+            popUpMessage = returnAnyErrorBlog(user, currBlog)
+
+            if popUpMessage is None:
+                if type == "up":
+                    change = 1
+                else:
+                    change = -1
+                updateBlogVotes(blogId, change, user)
+                return HttpResponseRedirect("/blog/{}".format(blogId))
+            else:
                 context = {
                     'blog': blog,
                     'commentList': commentList,
                     'noOfComments': len(commentList),
                     'user': user,
-                    'popUp': True,
+                    'popUp': popUpMessage,
                 }
                 return HttpResponse(template.render(context, request))
 
-            change = 0
-            blogId, type = [x for x in request.POST.get("blogVote").split(',')]
-            if type == "up":
-                change = 1
-            else:
-                change = -1
-            updateBlogVotes(blogId, change)
-            return HttpResponseRedirect("/blog/{}/".format(blogId))
         elif "commentVote" in request.POST:
-            if user is None:
+            change = 0
+            commentId, type = [x for x in request.POST.get("commentVote").split(',')]
+            currComment = Comment.objects.get(id=commentId)
+
+            popUpMessage = returnAnyErrorComment(user, currComment)
+            if popUpMessage is None:
+                if type == "up":
+                    change = 1
+                else:
+                    change = -1
+                updateCommentVotes(commentId, change, user)
+                return HttpResponseRedirect("/blog/{}".format(blogId))
+            else:
                 context = {
                     'blog': blog,
                     'commentList': commentList,
                     'noOfComments': len(commentList),
                     'user': user,
-                    'popUp': True,
+                    'popUp': popUpMessage,
                 }
                 return HttpResponse(template.render(context, request))
-            change = 0
-            commentId, type = [x for x in request.POST.get("commentVote").split(',')]
-            if type == "up":
-                change = 1
-            else:
-                change = -1
-            updateCommentVotes(commentId, change)
-            return HttpResponseRedirect("/blog/{}/".format(blogId))
+
         elif "commentButton" in request.POST:
             buttonClicked = request.POST.get("commentButton")
             if buttonClicked == "post":
@@ -192,6 +243,12 @@ def new(request):
         'user': user,
     }
     return HttpResponse(template.render(context, request))
+
+
+
+
+
+#restrictive functions
 
 
 class Construct:
@@ -326,3 +383,4 @@ def updateUserDatabase1357(request): #updates the database with this blogId
 
 
 
+#restrictive functions

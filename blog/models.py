@@ -52,3 +52,18 @@ class UserComment(models.Model):
 
     class Meta:
         unique_together = (("user", "comment"),)
+
+class BlogVote(models.Model):
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (("blog", "user"),)
+
+class CommentVote(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (("comment", "user"),)
+

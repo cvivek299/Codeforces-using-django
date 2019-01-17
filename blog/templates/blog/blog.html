@@ -18,11 +18,12 @@
 
 <div class="Page">
 
+    <!-- pop up-->
     <div class="modal fade bd-example-modal-sm" tabindex="-1" id="InvalidPopup2" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm ModalDialogPosition">
             <div class="modal-content">
                 <div class="modal-header">
-                    <p class="modal-title WhiteText" id="exampleModalLabel" >You should enter into the system before you vote</p>
+                    <p class="modal-title WhiteText" id="ModalLabel2" ></p>
                     <button type="button" class="close WhiteText" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -30,6 +31,7 @@
             </div>
         </div>
     </div>
+    <!-- pop up-->
 
     <div class="row">
         <div class="col-auto Logo" align="center">
@@ -214,6 +216,7 @@
         });
 
         {% if popUp %}
+            $('#ModalLabel2').html('{{ popUp }}');
             $('#InvalidPopup2').modal({
             });
         {% endif %}
