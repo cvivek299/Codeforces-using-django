@@ -4,6 +4,8 @@ register = template.Library()
 
 @register.filter
 def userColorClass(user):
+    if user is None:
+        return ""
     if user.rating <= 0:
         return "UserBlack"
     elif user.rating < 1200:
