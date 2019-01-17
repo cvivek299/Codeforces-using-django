@@ -17,7 +17,7 @@
     </script>
 </head>
 
-
+{% load blogFilters %}
 
 <div class="Page">
     <div class="modal fade bd-example-modal-sm" tabindex="-1" id="InvalidPopup" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -40,7 +40,7 @@
         </div>
         <div class="col" align="center">
             {% if user %}
-                <span class="Links"><a href="/userprofile/{{ user.username }}/"><u>{{ user.username }}</u></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
+                <span class="Links"><a href="/userprofile/{{ user.username }}/"><div class="{{ user|userColorClass }}"><u>{{ user.username }}</u></div></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
             {% else %}
             <span class="Links"><a href="/entry/login"><u>Enter</u></a>&nbsp|&nbsp<a href="/entry/register"><u>Register</u></a></span>
             {%  endif %}
@@ -56,7 +56,7 @@
     {% for obj in blogWithCommentsList %}
         <div class="Blog">
             <div class="BlogName"><h2><a href="/blog/{{ obj.blog.id }}/">{{ obj.blog.blogName | safe }}</a></h2></div>
-            <div><b>By <a href="/userprofile/{{ obj.blog.user.username }}" class="Username">{{ obj.blog.user.username }}</a></b></div>
+            <div><b>By <a href="/userprofile/{{ obj.blog.user.username }}" class="Username"><span class="{{ obj.blog.user|userColorClass }}">{{ obj.blog.user.username }}</span></a></b></div>
             <br>
             <div class="Summary">
                 {{ obj.blog.description | truncatechars_html:500 | safe }}

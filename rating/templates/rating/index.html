@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
 
 </head>
+{% load blogFilters %}
 
 
 
@@ -20,7 +21,7 @@
         </div>
         <div class="col" align="center">
             {% if user %}
-                <span class="Links"><a href="/userprofile/{{ user.username }}/"><u>{{ user.username }}</u></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
+                <span class="Links"><a href="/userprofile/{{ user.username }}/"><div class="{{ user|userColorClass }}"><u>{{ user.username }}</u></div></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
             {% else %}
             <span class="Links"><a href="/entry/login"><u>Enter</u></a>&nbsp|&nbsp<a href="/entry/register"><u>Register</u></a></span>
             {%  endif %}
@@ -51,7 +52,7 @@
                     <tr>
                         <td>{{ user.count }}</td>
 
-                        <td><img src={{ user.obj.country.flag }} style='width:20px;height:15px' alt=""> <a href="/userprofile/{{ user.obj.username }}" class="RatingLinks">{{ user.obj.username }}</a></td>
+                        <td><img src={{ user.obj.country.flag }} style='width:20px;height:15px' alt=""> <a href="/userprofile/{{ user.obj.username }}" class="RatingLinks"><span class="{{ user.obj|userColorClass }}">{{ user.obj.username }}</span></a></td>
                         <td>{{ user.obj.rating }}</td>
                     </tr>
                 {% endfor %}

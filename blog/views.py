@@ -9,6 +9,8 @@ from project import settings
 from .models import Blog, BlogComment, Comment, User, UserComment, UserBlog, BlogVote, CommentVote
 from django.db import transaction
 
+
+
 #helper functions
 def updateBlogVotes(blogId, change, votingUser):
     blog = Blog.objects.get(id=blogId)

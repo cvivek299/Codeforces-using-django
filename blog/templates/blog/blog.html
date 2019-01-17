@@ -15,7 +15,7 @@
     </script>
 </head>
 
-
+{% load blogFilters %}
 <div class="Page">
 
     <!-- pop up-->
@@ -39,7 +39,7 @@
         </div>
         <div class="col" align="center">
             {% if user %}
-                <span class="Links"><a href="/userprofile/{{ user.username }}"><u>{{ user.username }}</u></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
+                <span class="Links"><a href="/userprofile/{{ user.username }}"><div class="{{ user|userColorClass }}"><u>{{ user.username }}</u></div></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
             {% else %}
             <span class="Links"><a href="/entry/login"><u>Enter</u></a>&nbsp|&nbsp<a href="/entry/register"><u>Register</u></a></span>
             {%  endif %}
@@ -58,7 +58,7 @@
 
         <!-- blog part-->
         <div class="BlogName"><h2><a href="/blog/{{ blog.id }}/">{{ blog.blogName | safe }}</a></h2></div>
-        <div><b>By <a href="/userprofile/{{ blog.user.username }}/" class="Username">{{ blog.user.username | safe }}</a></b></div>
+        <div><b>By <a href="/userprofile/{{ blog.user.username }}/" class="Username"><span class="{{ blog.user|userColorClass }}">{{ blog.user.username }}</span></a></b></div>
         <br>
         <p class="Description">
             {{ blog.description | safe }}
@@ -112,7 +112,7 @@
                 <div class="col-auto" align="center">
                     <figure>
                         <img src="{{ user.profilePhoto }}" width="120" height="90" >
-                        <figcaption><a href="/userprofile/{{ user.username }}" style="color:black">{{ user.username }}</a></figcaption>
+                        <figcaption><a href="/userprofile/{{ user.username }}" style="color:black"><span class="{{ user|userColorClass }}">{{ user.username }}</span></a></figcaption>
                     </figure>
                 </div>
                 <div class="col-4">
@@ -168,7 +168,7 @@
                 <div class="col-auto">
                   <figure>
                     <img src="{{ obj.comment.user.profilePhoto }}" width="120" height="90" >
-                    <figcaption align="center"><a href="/userprofile/{{ obj.comment.user.username }}" style="color:black">{{ obj.comment.user.username }}</a></figcaption>
+                    <figcaption align="center"><a href="/userprofile/{{ obj.comment.user.username }}" style="color:black"><span class="{{ obj.comment.user|userColorClass }}">{{ obj.comment.user.username }}</span></a></figcaption>
                   </figure>
                 </div>
                 <div class="col">

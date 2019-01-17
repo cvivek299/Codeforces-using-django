@@ -10,6 +10,61 @@
 
 }
 
+.UserBlack
+{
+    color: black;
+}
+
+.UserGray
+{
+    color: gray;
+}
+
+.UserGreen
+{
+    color: green;
+}
+
+.UserCyan
+{
+    color: lightseagreen;
+}
+
+.UserBlue
+{
+  color: blue;
+}
+
+.UserPurple
+{
+    color: purple;
+}
+
+.UserOrange
+{
+    color: orange;
+}
+
+.UserOrangeRed
+{
+    color: darkorange;
+}
+
+.UserLightRed
+{
+    color: lightcoral;
+}
+.UserRed
+{
+    color: red;
+}
+
+.UserDarkRed
+{
+    color: darkred;
+}
+
+
 #WriteBlog, #Settings
 {
     display: none;

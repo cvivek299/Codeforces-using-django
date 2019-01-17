@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
 
 </head>
-
+{% load blogFilters %}
 <div class="Page">
 
     <div class="row">
@@ -17,7 +17,7 @@
         </div>
         <div class="col" align="center">
             {% if user %}
-                <span class="Links"><a href="/userprofile/{{ user.username }}/"><u>{{ user.username }}</u></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
+                <span class="Links"><a href="/userprofile/{{ user.username }}/"><div class="{{ user|userColorClass }}"><u>{{ user.username }}</u></div></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
             {% else %}
             <span class="Links"><a href="/entry/login"><u>Enter</u></a>&nbsp|&nbsp<a href="/entry/register"><u>Register</u></a></span>
             {%  endif %}
@@ -33,7 +33,7 @@
         <br><br>
         <div class="BlogName"><h2>New topic</h2></div>
         <input type="image" src="https://st.codeforces.com/s/74773/images/flags/48/gb.png"><br>
-        The topic is now being edited by: <b>{{ user.username }}</b>
+        The topic is now being edited by: <b><span class="{{ user|userColorClass }}">{{ user.username }}</span></b>
         <br><br>
         <!-- login form -->
         <form action="#" method="post">

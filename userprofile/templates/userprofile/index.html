@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
-
+{% load blogFilters %}
 <div class="Page">
 
     <div class="row">
@@ -18,7 +18,7 @@
         </div>
         <div class="col" align="center">
             {% if user %}
-                <span class="Links"><a href="/userprofile/{{ user.username }}/"><u>{{ user.username }}</u></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
+                <span class="Links"><a href="/userprofile/{{ user.username }}/"><div class="{{ user|userColorClass }}"><u>{{ user.username }}</u></div></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
             {% else %}
             <span class="Links"><a href="/entry/login"><u>Enter</u></a>&nbsp|&nbsp<a href="/entry/register"><u>Register</u></a></span>
             {%  endif %}
@@ -34,9 +34,9 @@
         <table class="Table ProfileTable" style="max-width: 750px;" >
             <tr>
                 <td>
-                        <p class="UsernameProfile">{{ profileUser.username }}</p>
+                        <p class="UsernameProfile"><span class="{{ profileUser|userColorClass }}">{{ profileUser.username }}</span></p>
                         <p><input type="image" src="https://st.codeforces.com/s/74773/images/icons/rating-24x24.png">&nbsp
-                            Contest rating: <b>{{ profileUser.rating }}</b>
+                            Contest rating: <b><span class="{{ profileUser|userColorClass }}">{{ profileUser.rating }}</span></b>
                         </p>
                         <p>
                             <input type="image" src="https://st.codeforces.com/s/74773/images/icons/star_blue_24.png">&nbsp

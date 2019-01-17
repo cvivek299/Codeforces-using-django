@@ -29,7 +29,7 @@
   </script>
 
 </head>
-
+{% load blogFilters %}
 
 <div class="Page">
 
@@ -39,7 +39,7 @@
         </div>
         <div class="col" align="center">
             {% if user %}
-                <span class="Links"><a href="/userprofile/{{ user.username }}/"><u>{{ user.username }}</u></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
+                <span class="Links"><a href="/userprofile/{{ user.username }}/"><div class="{{ user|userColorClass }}"><u>{{ user.username }}</u></div></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
             {% else %}
             <span class="Links"><a href="/entry/login"><u>Enter</u></a>&nbsp|&nbsp<a href="/entry/register"><u>Register</u></a></span>
             {%  endif %}
@@ -59,7 +59,7 @@
             <tr>
 
                 <td>
-                    <div class="UsernameProfile">{{ user.username }}</div>
+                    <div class="UsernameProfile"><span class="{{ user|userColorClass }}">{{ user.username }}</span></div>
                     <!-- login form -->
                     <form action="#" method="post" class="SocialSettingsForm">
                         {% csrf_token %}
