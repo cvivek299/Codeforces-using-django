@@ -72,9 +72,9 @@
         <div class="BlogName"><h2><a href="/blog/{{ blog.id }}/">{{ blog.blogName | safe }}</a></h2></div>
         <div><b>By <a href="/userprofile/{{ blog.user.username }}/" class="Username"><span class="{{ blog.user|userColorClass }}">{{ blog.user.username }}</span></a></b></div>
         <br>
-        <p class="Description">
+        <div class="Description">
             {{ blog.description | safe }}
-        </p>
+        </div>
         <!-- blog part-->
 
         <!--votes vala bar of blog-->
