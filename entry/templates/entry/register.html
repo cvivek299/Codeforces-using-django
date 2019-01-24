@@ -1,12 +1,5 @@
 
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
 
 </head>
 {% load blogFilters %}
@@ -24,9 +17,9 @@
             {%  endif %}
         </div>
     </div>
-<!--navigation bar-->
+    <!--navigation bar-->
     <nav class="navbar navbar-expand-lg navbar-light BorderNav">
-      <a class="navbar-brand" href="/blog/">Blog</a>
+        <a class="navbar-brand" href="/blog/">Blog</a>
         <a class="navbar-brand" href="/rating/">Rating</a>
     </nav>
 
@@ -44,31 +37,31 @@
                 <form action="#" method="post">
                     {% csrf_token %}
                     <!-- username -->
-                  <div class="form-group" >
-                    <label for="UsernameLabel" class="FormLabel">Handle</label>
-                    <input type="text" name="username" class="form-control" id="UsernameLabel" aria-describedby="UsernameInfo" placeholder="Enter handle">
-                    {%  if handleError %}
-                      <small id="UsernameInfo" class="form-text ErrorLabel">{{ handleError }}</small>
-                    {% else %}
-                      <small id="UsernameInfo" class="form-text text-muted">This means your username (nickname) on Codeforces.</small>
-                    {% endif %}
-                  </div>
+                    <div class="form-group" >
+                        <label for="UsernameLabel" class="FormLabel">Handle</label>
+                        <input type="text" name="username" class="form-control" id="UsernameLabel" aria-describedby="UsernameInfo" placeholder="Enter handle">
+                        {%  if handleError %}
+                          <small id="UsernameInfo" class="form-text ErrorLabel">{{ handleError }}</small>
+                        {% else %}
+                          <small id="UsernameInfo" class="form-text text-muted">This means your username (nickname) on Codeforces.</small>
+                        {% endif %}
+                    </div>
                     <!-- password -->
-                  <div class="form-group">
-                    <label for="PasswordLabel" class="FormLabel">Password</label>
-                    <input type="password" name="password" class="form-control" id="PasswordLabel" placeholder="Password">
-                  </div>
-                  <div class="form-group">
-                    <label for="ConfirmPasswordLabel" class="FormLabel">Confirm Password</label>
-                    <input type="password" name="confirmPassword" class="form-control" id="ConfirmPasswordLabel" aria-describedby="PasswordErrorInfo" placeholder="Confirm Password">
-                    {%  if passwordError %}
-                      <small id="PasswordErrorInfo" class="form-text ErrorLabel">{{ passwordError }}</small>
-                    {% endif %}
-                  </div>
+                    <div class="form-group">
+                        <label for="PasswordLabel" class="FormLabel">Password</label>
+                        <input type="password" name="password" class="form-control" id="PasswordLabel" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="ConfirmPasswordLabel" class="FormLabel">Confirm Password</label>
+                        <input type="password" name="confirmPassword" class="form-control" id="ConfirmPasswordLabel" aria-describedby="PasswordErrorInfo" placeholder="Confirm Password">
+                        {%  if passwordError %}
+                            <small id="PasswordErrorInfo" class="form-text ErrorLabel">{{ passwordError }}</small>
+                        {% endif %}
+                    </div>
                     <!-- submit -->
-                  <div class="RegisterButton" >
-                    <button type="submit" >Register</button>
-                  </div>
+                    <div class="RegisterButton" >
+                        <button type="submit" >Register</button>
+                    </div>
                 </form>
                 <!-- login form-->
             </td>
@@ -82,10 +75,8 @@
         Server time: Jan/07/2019 16:12:41UTC+5.5 (d1).<br>
         <span style="font-size: 0.8em">Privacy Policy</span><br><br>
         <p>Supported by</p>
-            <input type="image" src="https://st.codeforces.com/s/88434/images/telegram-100x100.png" width="60" />
-            &nbsp &nbsp &nbsp
-            <input type="image" src="https://st.codeforces.com/s/88434/images/itmo_small_en-logo.png" width="110" />
-
-
+        <input type="image" src="https://st.codeforces.com/s/88434/images/telegram-100x100.png" width="60" />
+        &nbsp &nbsp &nbsp
+        <input type="image" src="https://st.codeforces.com/s/88434/images/itmo_small_en-logo.png" width="110" />
     </footer>
 </div>

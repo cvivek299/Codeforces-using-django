@@ -1,18 +1,18 @@
 
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
 
         var stringData = JSON.parse('{{ jsonData2 | escapejs }}');
         var jsonData=JSON.parse(stringData)
@@ -24,9 +24,9 @@
 
         $( "#Country" ).autocomplete({
           source: availableTags
-    });
-  } );
-  </script>
+        });
+    } );
+    </script>
 
 </head>
 {% load blogFilters %}
@@ -45,7 +45,7 @@
             {%  endif %}
         </div>
     </div>
-<!--navigation bar-->
+    <!--navigation bar-->
     <nav class="navbar navbar-expand-lg navbar-light BorderNav">
       <a class="navbar-brand" href="/blog/">Blog</a>
         <a class="navbar-brand" href="/rating/">Rating</a>
@@ -97,9 +97,9 @@
         Server time: Jan/07/2019 16:12:41UTC+5.5 (d1).<br>
         <span style="font-size: 0.8em">Privacy Policy</span><br><br>
         <p>Supported by</p>
-            <input type="image" src="https://st.codeforces.com/s/88434/images/telegram-100x100.png" width="60" />
-            &nbsp &nbsp &nbsp
-            <input type="image" src="https://st.codeforces.com/s/88434/images/itmo_small_en-logo.png" width="110" />
+        <input type="image" src="https://st.codeforces.com/s/88434/images/telegram-100x100.png" width="60" />
+        &nbsp &nbsp &nbsp
+        <input type="image" src="https://st.codeforces.com/s/88434/images/itmo_small_en-logo.png" width="110" />
     </footer>
 </div>
 

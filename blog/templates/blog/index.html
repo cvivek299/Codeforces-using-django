@@ -1,19 +1,19 @@
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    }
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
     </script>
 </head>
 
@@ -46,59 +46,59 @@
             {%  endif %}
         </div>
     </div>
-<!--navigation bar-->
+    <!--navigation bar-->
     <nav class="navbar navbar-expand-lg navbar-light BorderNav">
-      <a class="navbar-brand" href="/blog/">Blog</a>
+        <a class="navbar-brand" href="/blog/">Blog</a>
         <a class="navbar-brand" href="/rating/">Rating</a>
     </nav>
     <!--navigation bar-->
-{%  if blogWithCommentsList %}
-    {% for obj in blogWithCommentsList %}
-        <div class="Blog">
-            <div class="BlogName"><h2><a href="/blog/{{ obj.blog.id }}/">{{ obj.blog.blogName | safe }}</a></h2></div>
-            <div><b>By <a href="/userprofile/{{ obj.blog.user.username }}" class="Username"><span class="{{ obj.blog.user|userColorClass }}">{{ obj.blog.user.username }}</span></a></b></div>
-            <br>
-            <div class="Summary">
-                {{ obj.blog.description | truncatechars_html:500 | safe }}
-                <br><br>
-                <a href="/blog/{{ obj.blog.id }}/">Read full >></a> <!--to be corrected-->
-                <br><br>
+    {%  if blogWithCommentsList %}
+        {% for obj in blogWithCommentsList %}
+            <div class="Blog">
+                <div class="BlogName"><h2><a href="/blog/{{ obj.blog.id }}/">{{ obj.blog.blogName | safe }}</a></h2></div>
+                <div><b>By <a href="/userprofile/{{ obj.blog.user.username }}" class="Username"><span class="{{ obj.blog.user|userColorClass }}">{{ obj.blog.user.username }}</span></a></b></div>
+                <br>
+                <div class="Summary">
+                    {{ obj.blog.description | truncatechars_html:500 | safe }}
+                    <br><br>
+                    <a href="/blog/{{ obj.blog.id }}/">Read full >></a> <!--to be corrected-->
+                    <br><br>
+                </div>
+
+
+                <!--votes vala bar of blog-->
+                <nav class="navbar navbar-light justify-content-between BorderNav">
+                    <form class="form-inline" action="#" method="post"> <!-- blog vote(sends blogVote with up or down value)-->
+                        {% csrf_token %}
+                        <button type="submit" name="blogVote" value="{{ obj.blog.id }},up" style="background-color:transparent; border-color:transparent; padding:0px 0px 0px 0px;">
+                            <img src="https://st.codeforces.com/s/14735/images/actions/voteup.png">
+                        </button>
+                        {% if obj.blog.votes < 0 %}
+                            <span class="navbar-brand mb-0 h1">&nbsp {{ obj.blog.votes }}</span>
+                        {% else %}
+                            <span class="navbar-brand mb-0 h1">&nbsp +{{ obj.blog.votes }}</span>
+                        {% endif %}
+                        <button type="submit" name="blogVote" value="{{ obj.blog.id }},down" style="background-color:transparent; border-color:transparent; padding:0px 0px 0px 0px;">
+                            <img src="https://st.codeforces.com/s/14735/images/actions/votedown.png">
+                        </button>
+                    </form>
+                    <form class="form-inline">
+                        <input type="image" src="https://st.codeforces.com/s/14735/images/blog/user_16x16.png" />
+                        &nbsp
+                            {{ obj.blog.user.username }}
+                        &nbsp
+                        <input type="image" src="https://st.codeforces.com/s/14735/images/blog/comments_16x16.png" />
+                        &nbsp
+                        {{ obj.noOfComments }}
+                    </form>
+                </nav>
+                <!--votes vala bar of blog-->
             </div>
+        {% endfor %}
 
-
-            <!--votes vala bar of blog-->
-            <nav class="navbar navbar-light justify-content-between BorderNav">
-                <form class="form-inline" action="#" method="post"> <!-- blog vote(sends blogVote with up or down value)-->
-                    {% csrf_token %}
-                    <button type="submit" name="blogVote" value="{{ obj.blog.id }},up" style="background-color:transparent; border-color:transparent; padding:0px 0px 0px 0px;">
-                        <img src="https://st.codeforces.com/s/14735/images/actions/voteup.png">
-                    </button>
-                    {% if obj.blog.votes < 0 %}
-                        <span class="navbar-brand mb-0 h1">&nbsp {{ obj.blog.votes }}</span>
-                    {% else %}
-                        <span class="navbar-brand mb-0 h1">&nbsp +{{ obj.blog.votes }}</span>
-                    {% endif %}
-                    <button type="submit" name="blogVote" value="{{ obj.blog.id }},down" style="background-color:transparent; border-color:transparent; padding:0px 0px 0px 0px;">
-                        <img src="https://st.codeforces.com/s/14735/images/actions/votedown.png">
-                    </button>
-                </form>
-                <form class="form-inline">
-                    <input type="image" src="https://st.codeforces.com/s/14735/images/blog/user_16x16.png" />
-                    &nbsp
-                        {{ obj.blog.user.username }}
-                    &nbsp
-                    <input type="image" src="https://st.codeforces.com/s/14735/images/blog/comments_16x16.png" />
-                    &nbsp
-                    {{ obj.noOfComments }}
-                </form>
-            </nav>
-            <!--votes vala bar of blog-->
-        </div>
-    {% endfor %}
-
-{% else %}
-    <p>No blog Present</p>
-{% endif %}
+    {% else %}
+        <p>No blog Present</p>
+    {% endif %}
 
     <br><br>
     <hr>
