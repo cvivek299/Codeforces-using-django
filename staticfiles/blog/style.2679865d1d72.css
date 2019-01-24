@@ -1,0 +1,138 @@
+
+.Page
+{
+    padding-top: 20px;
+    padding-left: 5%;
+    padding-right: 5%;
+    max-width: 1350px;
+    margin-left:auto;
+    margin-right: auto;
+
+}
+.Blog
+{
+    padding-top:20px;
+}
+.BlogName,.CommentHighlight
+{
+    color: royalblue;
+    font-family: Calibri;
+}
+.Username
+{
+    color:black;
+}
+.Summary,.Description
+{
+    padding-left: 20px;
+    text-align: left;
+    border-left: 4px solid lightslategray;
+}
+
+.CommentButtons
+{
+    margin-top: 10px;
+}
+
+.LoginTable
+{
+    width: 400px;
+}
+
+.LoginHeading
+{
+    color: royalblue;
+    text-align: left;
+    font-weight: 700;
+}
+
+.LoginButton,.RegisterButton,.SubmitButton
+{
+    text-align: center;
+}
+
+.FormLabel
+{
+    font-weight: 500;
+}
+.Links
+{
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 10px;
+    padding-top: 15px;
+}
+
+.Logo
+{
+    padding-bottom: 10px;
+}
+
+.BorderNav
+{
+    border: 0.5px solid lightslategray;
+    border-radius: 5px;
+    padding-bottom: 0em;
+
+    padding-top: 0.5em;
+    height: 3em;
+    margin-bottom: 30px;
+}
+
+.Footer
+{
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+#WriteComment
+{
+    padding-top: 60px;
+}
+
+.ProfileTable
+{
+    border-collapse:separate;
+    border:1px solid #CCC;
+    border-radius:10px;
+    margin-left:7%;
+
+}
+
+.SocialSettingsTable
+{
+    border-collapse:separate;
+    border:1px solid #CCC;
+    border-radius:10px;
+}
+.UsernameProfile
+{
+    font-weight: bold;
+    font-size: 1.5em;
+
+}
+
+.SocialSettingsForm
+{
+    padding-top:30px;
+    padding-left: 30%;
+    padding-right:30%;
+}
+
+.RatingLinks
+{
+    color: black;
+}
+
+.ProfilePhoto
+{
+    padding: 10px;
+    border:1px solid #CCC;
+}
+
+.BlogTextarea
+{
+    width:100%;
+    border:double 4px #CCC;
+}

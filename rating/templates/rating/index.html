@@ -1,0 +1,80 @@
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
+
+</head>
+{% load blogFilters %}
+
+
+
+<div class="Page">
+
+    <div class="row">
+        <div class="col-auto Logo" align="center">
+            <input type="image" src="https://st.codeforces.com/s/88434/images/ny-codeforces-logo-with-telegram.png"/>
+        </div>
+        <div class="col" align="center">
+            {% if user %}
+                <span class="Links"><a href="/userprofile/{{ user.username }}/"><div class="{{ user|userColorClass }}"><u>{{ user.username }}</u></div></a>&nbsp|&nbsp<a href="/entry/logout"><u>Logout</u></a></span>
+            {% else %}
+            <span class="Links"><a href="/entry/login"><u>Enter</u></a>&nbsp|&nbsp<a href="/entry/register"><u>Register</u></a></span>
+            {%  endif %}
+        </div>
+    </div>
+<!--navigation bar-->
+    <nav class="navbar navbar-expand-lg navbar-light BorderNav">
+      <a class="navbar-brand" href="/blog/">Blog</a>
+        <a class="navbar-brand" href="/rating/">Rating</a>
+    </nav>
+    <!--navigation bar-->
+    {%  if userList %}
+
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col" colspan="3">Rating Table</th>
+                </tr>
+                <tr>
+                    <th scope="col"> </th>
+                    <th scope="col">Who</th>
+                    <th scope="col">Rating</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                {%  for user in userList %}
+                    <tr>
+                        <td>{{ user.count }}</td>
+
+                        <td><img src={{ user.obj.country.flag }} style='width:20px;height:15px' alt=""> <a href="/userprofile/{{ user.obj.username }}" class="RatingLinks"><span class="{{ user.obj|userColorClass }}">{{ user.obj.username }}</span></a></td>
+                        <td>{{ user.obj.rating }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No user Present</p>
+    {% endif %}
+
+
+    <br><br>
+    <hr>
+    <footer class="Footer">
+        Codeforces(c) Copyright 2010-2018 Mike Mirzayanov<br>
+        The only programming contests Web 2.0 platform<br>
+        Server time: Jan/07/2019 16:12:41UTC+5.5 (d1).<br>
+        <span style="font-size: 0.8em">Privacy Policy</span><br><br>
+        <p>Supported by</p>
+            <input type="image" src="https://st.codeforces.com/s/88434/images/telegram-100x100.png" width="60" />
+            &nbsp &nbsp &nbsp
+            <input type="image" src="https://st.codeforces.com/s/88434/images/itmo_small_en-logo.png" width="110" />
+
+
+    </footer>
+</div>
