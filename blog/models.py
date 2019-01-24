@@ -32,7 +32,7 @@ class Blog(models.Model):
 
 
 class Comment(MPTTModel):
-    description = models.CharField(max_length=500, default="")
+    description = models.CharField(max_length=5000, default="")
     votes = models.IntegerField(default=0, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
